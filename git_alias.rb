@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+def git_alias(gitalias)
+	path = File.expand_path('~') + "/.gitalias"
+	aliases = YAML.load_file(path)
+	if aliases.has_key?(gitalias) then
+		gitname = aliases[gitalias]["name"]
+		gitemail = aliases[gitalias]["email"]
+		`git config --local user.name "#{gitname}"`
+		`git config --local user.email "#{gitemail}"`
+		return
+	end
+
+	puts "Error: No git alias '#{gitalias}' in #{path} config"
+end
+
+if ARGV.length == 1 then
+	git_alias(ARGV[0])
+end
