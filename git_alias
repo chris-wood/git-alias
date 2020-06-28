@@ -10,6 +10,8 @@ def git_alias(gitalias)
 		gitemail = aliases[gitalias]["email"]
 		`git config --local user.name "#{gitname}"`
 		`git config --local user.email "#{gitemail}"`
+		puts `git config --local --get user.name`
+		puts `git config --local --get user.email`
 		return
 	end
 
